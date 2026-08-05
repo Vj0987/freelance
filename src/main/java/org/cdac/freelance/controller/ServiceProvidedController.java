@@ -4,6 +4,7 @@ import org.cdac.freelance.dto.service_provided.CreateRequestDTO;
 import org.cdac.freelance.dto.service_provided.ServiceProvidedResponseDTO;
 import org.cdac.freelance.services.service_provided.ServiceProvideService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class ServiceProvidedController {
 
     @PostMapping
     public ResponseEntity<Boolean> createServiceProvided(CreateRequestDTO requestDTO){
-        return ResponseEntity.ok(serviceProvideService.createServiceProvided(requestDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(serviceProvideService.createServiceProvided(requestDTO));
     }
 
     @GetMapping("/byServiceId/{serviceId}")
