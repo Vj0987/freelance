@@ -26,6 +26,9 @@ public class Users {
     @Column(name = "phoneNo")
     private String phoneNo;
 
+    @Column(name ="portfolio")
+    private String portfolio;
+
     public int getUserId() {
         return userId;
     }
@@ -72,5 +75,11 @@ public class Users {
 
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
+    }
+
+    public String getPortfolio() {return portfolio;}
+
+    public void setPortfolio(String portfolio) {
+        this.portfolio = portfolio;
     }
 }

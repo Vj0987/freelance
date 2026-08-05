@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import org.cdac.freelance.enums.ContractStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -24,6 +25,9 @@ public class CreateContractRequestDTO {
     @DecimalMin(value = "0.01", inclusive = true, message = "Amount must be greater than 0")
     @Digits(integer = 10, fraction = 2, message = "Amount must have at most 10 digits and 2 decimal places")
     private BigDecimal amount;
+
+    private ContractStatus status;
+
 
     @NotNull(message = "Completion date is required")
     @Future(message = "Completion date must be a future date")
@@ -59,6 +63,14 @@ public class CreateContractRequestDTO {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public ContractStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ContractStatus status) {
+        this.status = status;
     }
 
     public LocalDate getCompletionDate() {

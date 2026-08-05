@@ -2,8 +2,6 @@ package org.cdac.freelance.entity;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
-
 @Entity
 @Table(name = "services")
 public class Service {
@@ -22,23 +20,12 @@ public class Service {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "cost")
-    private BigDecimal cost;
-
     public int getServiceId() {
         return serviceId;
     }
 
     public void setServiceId(int serviceId) {
         this.serviceId = serviceId;
-    }
-
-    public BigDecimal getCost() {
-        return cost;
-    }
-
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
     }
 
     public String getDescription() {

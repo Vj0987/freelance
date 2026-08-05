@@ -30,7 +30,6 @@ public class ServiceServiceImpl implements ServiceService{
                     response.setProviderName(user.getFullName());
                     response.setTitle(service.getTitle());
                     response.setDescription(service.getDescription());
-                    response.setCost(service.getCost());
 
                     return response;
                 })

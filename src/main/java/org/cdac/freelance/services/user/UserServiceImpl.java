@@ -3,6 +3,7 @@ package org.cdac.freelance.services.user;
 import org.cdac.freelance.dto.user.CreateUserRequestDTO;
 import org.cdac.freelance.dto.user.LoginRequestDTO;
 import org.cdac.freelance.dto.user.LoginResponseDTO;
+import org.cdac.freelance.dto.user.UserReposneDTO;
 import org.cdac.freelance.entity.Users;
 import org.cdac.freelance.exceptions.EmailAlreadyExistsException;
 import org.cdac.freelance.exceptions.UserAlreadyExistsException;
@@ -53,6 +54,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userRequestDTO.getEmail());
         user.setPhoneNo(userRequestDTO.getPhoneNo());
         user.setPassword(passwordEncoder.encode(userRequestDTO.getPassword()));
+        user.setPortfolio(userRequestDTO.getPortfolio());
 
         usersRepository.save(user);
         return true;
@@ -76,12 +78,26 @@ public class UserServiceImpl implements UserService {
         Users user = usersRepository.findByUserName(userPrincipal.getUsername()).orElseThrow(() -> new UserNotFoundException("User not found"));
 
         LoginResponseDTO response = new LoginResponseDTO();
-        response.setUserId(user.getUserId());
+
         response.setToken(token);
         response.setUserName(userPrincipal.getUsername());
         response.setFullName(userPrincipal.getUser().getFullName());
-        response.setEmail(user.getEmail());
-        response.setPhoneNo(user.getPhoneNo());
         return  response;
+    }
+
+    @Override
+    public UserReposneDTO getUserByUserName(String userName) {
+        Users user = usersRepository.findByUserName(userName).orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        UserReposneDTO responseDTO = new UserReposneDTO();
+
+        responseDTO.setUserId(user.getUserId());
+        responseDTO.setFullName(user.getFullName());
+        responseDTO.setUserName(user.getUserName());
+        responseDTO.setEmail(user.getEmail());
+        responseDTO.setPhoneNo(user.getPhoneNo());
+        responseDTO.setPortfolio(user.getPortfolio());
+
+        return responseDTO;
     }
 }

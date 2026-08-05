@@ -4,6 +4,7 @@ import org.cdac.freelance.dto.contract.ContractResponseDTO;
 import org.cdac.freelance.dto.contract.CreateContractRequestDTO;
 import org.cdac.freelance.entity.Contract;
 import org.cdac.freelance.entity.Users;
+import org.cdac.freelance.enums.ContractStatus;
 import org.cdac.freelance.exceptions.UserNotFoundException;
 import org.cdac.freelance.repository.ContractRepository;
 import org.cdac.freelance.repository.UsersRepository;
@@ -43,6 +44,7 @@ public class ContractServiceImpl implements ContractService{
         contract.setClientId(createContractRequestDTO.getClientId());
         contract.setEscrowId(createContractRequestDTO.getEscrowId());
         contract.setAmount(createContractRequestDTO.getAmount());
+        contract.setStatus(ContractStatus.STARTED);
         contract.setCompletionDate(createContractRequestDTO.getCompletionDate());
 
         contractRepository.save(contract);
@@ -66,6 +68,7 @@ public class ContractServiceImpl implements ContractService{
             responseDTO.setClientName(client.getFullName());
             responseDTO.setEscrowId(contract.getEscrowId());
             responseDTO.setAmount(contract.getAmount());
+            responseDTO.setStatus(contract.getStatus());
             responseDTO.setCompletionDate(contract.getCompletionDate());
 
             return responseDTO;

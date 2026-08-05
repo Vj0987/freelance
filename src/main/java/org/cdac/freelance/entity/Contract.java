@@ -1,6 +1,7 @@
 package org.cdac.freelance.entity;
 
 import jakarta.persistence.*;
+import org.cdac.freelance.enums.ContractStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -25,6 +26,10 @@ public class Contract {
 
     @Column(name = "amount")
     private BigDecimal amount;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private ContractStatus status;
 
     @Column(name = "completion_date")
     private LocalDate completionDate;
@@ -67,6 +72,14 @@ public class Contract {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public ContractStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ContractStatus status) {
+        this.status = status;
     }
 
     public LocalDate getCompletionDate() {

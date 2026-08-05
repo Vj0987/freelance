@@ -39,6 +39,8 @@ public class CreateUserRequestDTO {
     )
     private String phoneNo;
 
+    private String portfolio;
+
     public String getFullName() {
         return fullName;
     }
@@ -47,9 +49,7 @@ public class CreateUserRequestDTO {
         this.fullName = fullName;
     }
 
-    public String getUserName() {
-        return userName;
-    }
+    public String getUserName() {return userName;}
 
     public void setUserName(String userName) {
         this.userName = userName;
@@ -77,5 +77,11 @@ public class CreateUserRequestDTO {
 
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
+    }
+
+    public String getPortfolio() {return portfolio;}
+
+    public void setPortfolio(String portfolio) {
+        this.portfolio = portfolio;
     }
 }

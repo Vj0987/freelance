@@ -1,6 +1,7 @@
 package org.cdac.freelance.dto.contract;
 
 import jakarta.persistence.Column;
+import org.cdac.freelance.enums.ContractStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,6 +15,16 @@ public class ContractResponseDTO {
     private int clientId;
     private int escrowId;
     private BigDecimal amount;
+    private ContractStatus status;
+
+    public ContractStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ContractStatus status) {
+        this.status = status;
+    }
+
     private LocalDate completionDate;
 
     public String getProviderName() {
