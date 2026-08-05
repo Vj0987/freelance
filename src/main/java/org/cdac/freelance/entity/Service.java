@@ -11,9 +11,6 @@ public class Service {
     @Column(name = "service_id")
     private int serviceId;
 
-    @Column(name = "provider_id")
-    private int providerId;
-
     @Column(name = "title")
     private String title;
 
@@ -44,11 +41,4 @@ public class Service {
         this.title = title;
     }
 
-    public int getProviderId() {
-        return providerId;
-    }
-
-    public void setProviderId(int providerId) {
-        this.providerId = providerId;
-    }
 }
