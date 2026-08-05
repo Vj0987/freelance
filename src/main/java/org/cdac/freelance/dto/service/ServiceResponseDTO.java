@@ -3,7 +3,6 @@ package org.cdac.freelance.dto.service;
 public class ServiceResponseDTO {
 
     private int serviceId;
-    private String providerName;
     private String title;
     private String description;
 
@@ -31,11 +30,4 @@ public class ServiceResponseDTO {
         this.title = title;
     }
 
-    public String getProviderName() {
-        return providerName;
-    }
-
-    public void setProviderName(String providerName) {
-        this.providerName = providerName;
-    }
 }

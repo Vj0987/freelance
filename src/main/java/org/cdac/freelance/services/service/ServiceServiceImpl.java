@@ -25,14 +25,12 @@ public class ServiceServiceImpl implements ServiceService{
                 .stream()
                 .map(service -> {
                     ServiceResponseDTO response = new ServiceResponseDTO();
-                    Users user = usersRepository.findById(service.getProviderId()).orElseThrow(()->new UserNotFoundException("Provider Not Found"));
+
                     response.setServiceId(service.getServiceId());
-                    response.setProviderName(user.getFullName());
                     response.setTitle(service.getTitle());
                     response.setDescription(service.getDescription());
 
                     return response;
-                })
-                .toList();
+                }).toList();
     }
 }
