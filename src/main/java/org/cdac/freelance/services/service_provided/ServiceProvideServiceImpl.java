@@ -37,7 +37,7 @@ public class ServiceProvideServiceImpl implements ServiceProvideService{
     @Override
     public List<ServiceProvidedResponseDTO> getAllByServiceId(int serviceId) {
         return serviceProvidedRepository
-                .findByServiceId(serviceId)
+                .findByIdServiceId(serviceId)
                 .stream()
                 .map(
                     serviceProvided -> {
@@ -54,7 +54,7 @@ public class ServiceProvideServiceImpl implements ServiceProvideService{
     @Override
     public List<ServiceProvidedResponseDTO> getAllByProviderId(int providerId) {
         return serviceProvidedRepository
-                .findByProviderId(providerId)
+                .findByIdProviderId(providerId)
                 .stream()
                 .map(
                         serviceProvided -> {
