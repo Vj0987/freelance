@@ -4,20 +4,13 @@ import java.math.BigDecimal;
 
 public class CreateOfferDTO {
 
-    private int clientId;
+
     private int providerId;
     private int serviceId;
     private BigDecimal budget;
     private String description;
     private String title;
 
-    public int getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
-    }
 
     public int getProviderId() {
         return providerId;

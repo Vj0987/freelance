@@ -32,6 +32,7 @@ public class Offers {
     @Column(name = "description")
     private String description;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private OfferStatus status;
 
