@@ -25,7 +25,6 @@ public class ContractResponseDTO {
         this.status = status;
     }
 
-    private LocalDate completionDate;
 
     public String getProviderName() {
         return providerName;
@@ -83,11 +82,4 @@ public class ContractResponseDTO {
         this.amount = amount;
     }
 
-    public LocalDate getCompletionDate() {
-        return completionDate;
-    }
-
-    public void setCompletionDate(LocalDate completionDate) {
-        this.completionDate = completionDate;
-    }
 }

@@ -50,7 +50,7 @@ public class OffersServiceImpl implements OffersService {
     @Override
     public List<OfferResponseDTO> getByClientId(int clientId) {
         return offersRepository
-                .findByClientId(clientId)
+                .findByClientIdAndStatusNot(clientId, OfferStatus.CONTRACTED)
                 .stream()
                 .map(offers -> {
 
@@ -72,17 +72,17 @@ public class OffersServiceImpl implements OffersService {
 
     @Override
     public List<OfferResponseDTO> getByProviderId(int providerId) {
+        Users provider = usersRepository
+                .findById(providerId)
+                .orElseThrow(() -> new UserNotFoundException("Provider Not found"));
+
         return offersRepository
-                .findByProviderId(providerId)
+                .findByProviderIdAndStatusNot(providerId, OfferStatus.CONTRACTED)
                 .stream()
                 .map(offers -> {
                             Users client = usersRepository
                                     .findById(offers.getClientId())
                                     .orElseThrow(() -> new UserNotFoundException("Client Not Found"));
-
-                            Users provider = usersRepository
-                                    .findById(offers.getProviderId())
-                                    .orElseThrow(() -> new UserNotFoundException("Provider Not found"));
 
                             OfferResponseDTO responseDTO = getOfferResponseDTO(offers, client, provider);
                             return responseDTO;
@@ -95,7 +95,7 @@ public class OffersServiceImpl implements OffersService {
     public boolean acceptOffer(int offerId) {
         Offers offer = offersRepository
                 .findById(offerId)
-                .orElseThrow(()->new RuntimeException("Offer Not found"));
+                .orElseThrow(() -> new RuntimeException("Offer Not found"));
 
         offer.setStatus(OfferStatus.ACCEPTED);
 
@@ -107,7 +107,7 @@ public class OffersServiceImpl implements OffersService {
     public boolean rejectOffer(int offerId) {
         Offers offer = offersRepository
                 .findById(offerId)
-                .orElseThrow(()->new RuntimeException("Offer Not found"));
+                .orElseThrow(() -> new RuntimeException("Offer Not found"));
 
         offer.setStatus(OfferStatus.REJECTED);
 

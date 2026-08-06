@@ -31,4 +31,24 @@ public class ContractController {
     public ResponseEntity<List<ContractResponseDTO>> getContractByClientId(@AuthenticationPrincipal CustomUserPrincipal user){
         return ResponseEntity.ok(contractService.getAllContractByClientId(user.getUserId()));
     }
+
+    @PutMapping("/status-completed/{contractId}")
+    public ResponseEntity<Boolean> statusCompleted(@PathVariable int contractId){
+        return ResponseEntity.ok(contractService.statusCompleted(contractId));
+    }
+    @PutMapping("/status-confirmed/{contractId}")
+    public ResponseEntity<Boolean> statusConfirmed(@PathVariable int contractId){
+        return ResponseEntity.ok(contractService.statusConfirmed(contractId));
+    }
+    @PutMapping("/status-cancelled/{contractId}")
+    public ResponseEntity<Boolean> statusCancelled(@PathVariable int contractId){
+        return ResponseEntity.ok(contractService.statusCancelled(contractId));
+    }
+
+    @GetMapping("/redeem/{contractId}")
+    public ResponseEntity<Boolean> redeemPayment(@PathVariable int contractId){
+        return ResponseEntity.ok(contractService.redeemPayment(contractId));
+    }
+
+
 }

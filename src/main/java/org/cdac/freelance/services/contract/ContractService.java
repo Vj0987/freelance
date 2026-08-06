@@ -18,4 +18,7 @@ public interface ContractService {
 
     boolean statusCancelled(int contractId);
 
+    boolean redeemPayment(int contractId);
+
+
 }

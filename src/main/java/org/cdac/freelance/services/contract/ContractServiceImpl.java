@@ -9,6 +9,7 @@ import org.cdac.freelance.entity.Contract;
 import org.cdac.freelance.entity.Offers;
 import org.cdac.freelance.entity.Users;
 import org.cdac.freelance.enums.ContractStatus;
+import org.cdac.freelance.enums.EscrowStatus;
 import org.cdac.freelance.enums.OfferStatus;
 import org.cdac.freelance.exceptions.UserNotFoundException;
 import org.cdac.freelance.repository.ContractRepository;
@@ -90,7 +91,7 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public List<ContractResponseDTO> getAllContractByProviderId(int providerId) {
         Users provider = usersRepository.findById(providerId).orElseThrow(() -> new UserNotFoundException("Provider Not Found"));
-        return contractRepository.findByProviderId(providerId).stream().map(contract -> {
+        return contractRepository.findByProviderIdAndStatusNot(providerId,ContractStatus.FINISHED).stream().map(contract -> {
 
             Users client = usersRepository.findById(contract.getClientId())
                     .orElseThrow(() -> new UserNotFoundException("Client not found"));
@@ -125,6 +126,7 @@ public class ContractServiceImpl implements ContractService {
             responseDTO.setClientName(client.getFullName());
             responseDTO.setEscrowId(contract.getEscrowId());
             responseDTO.setAmount(contract.getAmount());
+            responseDTO.setStatus(contract.getStatus());
 
             return responseDTO;
         }).toList();
@@ -165,5 +167,16 @@ public class ContractServiceImpl implements ContractService {
         contractRepository.save(contract);
 
         return true;
+    }
+
+    @Override
+    public boolean redeemPayment(int contractId) {
+        Contract contract = contractRepository.findById(contractId).orElseThrow(() -> new RuntimeException("Contract not Found"));
+
+        if (contract.getStatus().equals(ContractStatus.CONFIRMED)) {
+            if (!escrowClient.checkEscrowStatusAsTerminated(contract.getEscrowId()))
+                return true;
+        }
+        return false;
     }
 }
