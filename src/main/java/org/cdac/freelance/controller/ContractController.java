@@ -18,8 +18,8 @@ public class ContractController {
     ContractService contractService;
 
     @PostMapping
-    public ResponseEntity<Boolean> createContract(@RequestBody CreateContractRequestDTO contractRequestDTO){
-        return ResponseEntity.ok(contractService.createContract(contractRequestDTO));
+    public ResponseEntity<Boolean> createContract(@RequestBody CreateContractRequestDTO requestDTO){
+        return ResponseEntity.ok(contractService.createContract(requestDTO.getOfferId()));
     }
 
     @GetMapping("/provider")

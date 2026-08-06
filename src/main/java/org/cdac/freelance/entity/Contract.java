@@ -31,9 +31,6 @@ public class Contract {
     @Column(name = "status")
     private ContractStatus status;
 
-    @Column(name = "completion_date")
-    private LocalDate completionDate;
-
     public int getContractId() {
         return contractId;
     }
@@ -80,13 +77,5 @@ public class Contract {
 
     public void setStatus(ContractStatus status) {
         this.status = status;
-    }
-
-    public LocalDate getCompletionDate() {
-        return completionDate;
-    }
-
-    public void setCompletionDate(LocalDate completionDate) {
-        this.completionDate = completionDate;
     }
 }
